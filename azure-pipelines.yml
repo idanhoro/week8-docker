@@ -1,11 +1,11 @@
-name: Docker-pipeline....
+name: Docker-pipeline...
 
 trigger:
 - master
 - feature/*
 
 pool:
-  name: agent1  
+  name: CI-agent 
 
 stages:
 
@@ -22,8 +22,8 @@ stages:
     - task: Docker@2
       displayName: Push image
       inputs:
-        containerRegistry: 'Testc-container'
-        repository: 'containertest'
+        containerRegistry: 'docker-connection'
+        repository: 'containeridanho555'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
 
@@ -50,17 +50,17 @@ stages:
           - task: Docker@2
             displayName: Loing to the container resource
             inputs:
-              containerRegistry: 'Testc-container'
+              containerRegistry: 'docker-connection'
               command: 'login'
           - task: CmdLine@2
             displayName: Pull the last image build
             inputs:
-              script: 'docker pull containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker pull containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
           - task: Bash@3
             displayName: Run the docker container
             inputs:
               targetType: 'inline'
-              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
           
           
 # Continuous Delivery Process for Production Environment
@@ -86,15 +86,15 @@ stages:
            - task: Docker@2
              displayName: Loing to the container resource
              inputs:
-              containerRegistry: 'Testc-container'
+              containerRegistry: 'docker-connection'
               command: 'login'
            - task: CmdLine@2
              displayName: Pull the last image build
              inputs:
-              script: 'docker pull containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker pull containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
            - task: Bash@3
              displayName: Run the docker container
              inputs:
               targetType: 'inline'
-              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST_PROD) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL_PROD) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST_PROD) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL_PROD) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
           
