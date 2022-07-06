@@ -22,8 +22,8 @@ stages:
     - task: Docker@2
       displayName: Push image
       inputs:
-        containerRegistry: 'Testc-container'
-        repository: 'containertest'
+        containerRegistry: 'docker-connection'
+        repository: 'containeridanho555'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
 
@@ -50,12 +50,12 @@ stages:
           - task: Docker@2
             displayName: Loing to the container resource
             inputs:
-              containerRegistry: 'Testc-container'
+              containerRegistry: 'docker-connection'
               command: 'login'
           - task: CmdLine@2
             displayName: Pull the last image build
             inputs:
-              script: 'docker pull containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker pull containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
           - task: Bash@3
             displayName: Run the docker container
             inputs:
@@ -86,12 +86,12 @@ stages:
            - task: Docker@2
              displayName: Loing to the container resource
              inputs:
-              containerRegistry: 'Testc-container'
+              containerRegistry: 'docker-connection'
               command: 'login'
            - task: CmdLine@2
              displayName: Pull the last image build
              inputs:
-              script: 'docker pull containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker pull containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
            - task: Bash@3
              displayName: Run the docker container
              inputs:
