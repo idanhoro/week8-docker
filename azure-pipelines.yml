@@ -60,7 +60,7 @@ stages:
             displayName: Run the docker container
             inputs:
               targetType: 'inline'
-              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
           
           
 # Continuous Delivery Process for Production Environment
@@ -96,5 +96,5 @@ stages:
              displayName: Run the docker container
              inputs:
               targetType: 'inline'
-              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST_PROD) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL_PROD) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho55.azurecr.io/containertest:$(Build.BuildId)'
+              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST_PROD) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL_PROD) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
           
