@@ -30,6 +30,8 @@ stages:
 # Continuous Deployment Process for Staging Environment
 - stage: DeployToStaging
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  variables:
+    - gorup: "Staging-variables"
   jobs:
   - deployment: staging
     displayName: Deploy to Staging
@@ -40,32 +42,13 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: CmdLine@2
-            inputs:
-              script: 'curl -fsSL https://get.docker.com -o get-docker.sh && chmod u+x get-docker.sh && ./get-docker.sh && sudo chmod 666 /var/run/docker.sock && sudo chown ubuntu:docker /var/run/docker.sock'
-          - task: CmdLine@2
-            displayName: Remove current container if exist
-            inputs:
-              script: 'docker rm -f  bootcamp || true'
-          - task: Docker@2
-            displayName: Loing to the container resource
-            inputs:
-              containerRegistry: 'docker-connection'
-              command: 'login'
-          - task: CmdLine@2
-            displayName: Pull the last image build
-            inputs:
-              script: 'docker pull containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
-          - task: Bash@3
-            displayName: Run the docker container
-            inputs:
-              targetType: 'inline'
-              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
-          
+            - template: templates/docker-cd-template.yaml
           
 # Continuous Delivery Process for Production Environment
 - stage: DeployToProduction
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  variables:
+    - gorup: "Production-variables"
   jobs:
    - deployment: production
      displayName: Deploy to Production
@@ -76,25 +59,4 @@ stages:
        runOnce:
          deploy:
            steps:
-           - task: CmdLine@2
-             inputs:
-              script: 'curl -fsSL https://get.docker.com -o get-docker.sh && chmod u+x get-docker.sh && ./get-docker.sh && sudo chmod 666 /var/run/docker.sock && sudo chown ubuntu:docker /var/run/docker.sock'
-           - task: CmdLine@2
-             displayName: Remove current container if exist
-             inputs:
-              script: 'docker rm -f  bootcamp || true'
-           - task: Docker@2
-             displayName: Loing to the container resource
-             inputs:
-              containerRegistry: 'docker-connection'
-              command: 'login'
-           - task: CmdLine@2
-             displayName: Pull the last image build
-             inputs:
-              script: 'docker pull containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
-           - task: Bash@3
-             displayName: Run the docker container
-             inputs:
-              targetType: 'inline'
-              script: 'docker run --restart=always -d --name bootcamp -p $(PORT):$(PORT) -e PGHOST=$(PGHOST_PROD) -e PGUSERNAME=$(PGUSERNAME) -e PGDATABASE=$(PGDATABASE) -e PGPASSWORD=$(PGPASSWORD) -e PGPORT=$(PGPORT) -e PORT=$(PORT) -e HOST=$(HOST) -e HOST_URL=$(HOST_URL_PROD) -e COOKIE_ENCRYPT_PWD=$(COOKIE_ENCRYPT_PWD) -e NODE_ENV=$(NODE_ENV) -e OKTA_ORG_URL=$(OKTA_ORG_URL) -e OKTA_CLIENT_ID=$(OKTA_CLIENT_ID) -e OKTA_CLIENT_SECRET=$(OKTA_CLIENT_SECRET) containeridanho555.azurecr.io/containeridanho555:$(Build.BuildId)'
-          
+             - template: templates/docker-cd-template.yaml
