@@ -31,7 +31,7 @@ stages:
 - stage: DeployToStaging
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   variables:
-    - gorup: "Staging-variables"
+    - group: "Staging-variables"
   jobs:
   - deployment: staging
     displayName: Deploy to Staging
@@ -48,7 +48,7 @@ stages:
 - stage: DeployToProduction
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
   variables:
-    - gorup: "Production-variables"
+    - group: "Production-variables"
   jobs:
    - deployment: production
      displayName: Deploy to Production
