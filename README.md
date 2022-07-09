@@ -1,6 +1,6 @@
 # Node.js Weight Tracker
 
-## Deployed using Dokcer & Azure DevOps
+## Deployed using Docker & Azure DevOps
 
 <img src="./images/docker-intro.gif" width="300"/>
 
